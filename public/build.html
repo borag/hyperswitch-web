@@ -8,6 +8,7 @@
       content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"
     />
     <meta name="theme-color" content="#000000" />
+    <% if (thirdPartyLoads) { %>
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700;800&display=swap"
       rel="stylesheet"
@@ -16,6 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Qwitcher+Grypen:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <% } %>
 
     <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
     <!--
@@ -33,6 +35,7 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Hyperswitch</title>
+    <% if (thirdPartyLoads) { %>
     <script
       id="braintree-checkout"
       src="https://js.braintreegateway.com/web/3.92.1/js/paypal-checkout.min.js"
@@ -47,14 +50,17 @@
       defer="defer"
       crossorigin="anonymous"
     ></script>
+    <% } %>
   </head>
 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <% if (thirdPartyLoads) { %>
     <img
       referrerpolicy="no-referrer-when-downgrade"
       src="https://static.scarf.sh/a.png?x-pxid=7cdc8831-68f6-49d8-b7f8-cede711681b2"
     />
+    <% } %>
     <div id="app"></div>
 
     <!--

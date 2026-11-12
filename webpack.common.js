@@ -145,6 +145,9 @@ const hyperswitchStack = getEnvVariable("HYPERSWITCH_STACK", "");
 const isEUStack = hyperswitchStack === "eu";
 const ENABLE_LOGGING = getEnvVariable("ENABLE_LOGGING", "false") === "true";
 const DISABLE_CSP = getEnvVariable("DISABLE_CSP", "false") === "true";
+// Leaves the SDK's pages without web fonts, PayPal's Braintree scripts and the analytics pixel.
+const DISABLE_THIRD_PARTY_LOADS =
+  getEnvVariable("DISABLE_THIRD_PARTY_LOADS", "false") === "true";
 const envSdkUrl = getEnvVariable("ENV_SDK_URL", "");
 const envBackendUrl = getEnvVariable("ENV_BACKEND_URL", "");
 const isPciCompliant = getEnvVariable("IS_PCI_COMPLIANT", "true") === "true";
@@ -284,6 +287,7 @@ module.exports = (publicPath = "auto") => {
     new HtmlWebpackPlugin({
       inject: true,
       template: "./public/build.html",
+      templateParameters: { thirdPartyLoads: !DISABLE_THIRD_PARTY_LOADS },
       chunks: ["app"],
       scriptLoading: "blocking",
       // Add CSP meta tag conditionally
@@ -311,6 +315,7 @@ module.exports = (publicPath = "auto") => {
       inject: true,
       filename: "fullscreenIndex.html",
       template: "./public/fullscreenIndexTemplate.html",
+      templateParameters: { thirdPartyLoads: !DISABLE_THIRD_PARTY_LOADS },
       // Add CSP meta tag conditionally
       meta: DISABLE_CSP
         ? {}

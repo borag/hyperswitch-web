@@ -261,6 +261,7 @@ let make = (keys, options: option<JSON.t>, analyticsInfo: option<JSON.t>) => {
           }
 
           if (
+            isPreloadEnabled &&
             Window.querySelectorAll(`script[src="https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js"]`)->Array.length === 0
           ) {
             let scriptURL = "https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js"
@@ -274,7 +275,9 @@ let make = (keys, options: option<JSON.t>, analyticsInfo: option<JSON.t>) => {
         }
       }->Sentry.sentryLogger
 
+      // The wallets' SDKs are preloads too: each wallet's component loads its own when it is shown.
       if (
+        isPreloadEnabled &&
         Window.querySelectorAll(`script[src="https://pay.google.com/gp/p/js/pay.js"]`)->Array.length === 0
       ) {
         let googlePayScriptURL = "https://pay.google.com/gp/p/js/pay.js"
@@ -293,6 +296,7 @@ let make = (keys, options: option<JSON.t>, analyticsInfo: option<JSON.t>) => {
       }
 
       if (
+        isPreloadEnabled &&
         Window.querySelectorAll(`script[src="https://img.mpay.samsung.com/gsmpi/sdk/samsungpay_web_sdk.js"]`)->Array.length === 0
       ) {
         let samsungPayScriptUrl = "https://img.mpay.samsung.com/gsmpi/sdk/samsungpay_web_sdk.js"
